@@ -2,22 +2,6 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import pandas as pd
-
-# ---------------------------------------------------------------------------------
-# API KEY : 코드 제출을 위해 환경변수 설정
-# ---------------------------------------------------------------------------------
-
-load_dotenv()
-sola_api_key = os.getenv('sola_api_key')
-
-
-
-# ---------------------------------------------------------------------------------
-# 데이터 불러오기
-# ---------------------------------------------------------------------------------
-df = pd.read_csv('기자간담회.csv')[['Date','Content']]
-df = df.dropna()
-
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.documents import Document
@@ -27,6 +11,20 @@ from dotenv import load_dotenv
 import pandas as pd
 from openai import OpenAI 
 
+# ---------------------------------------------------------------------------------
+# 데이터 불러오기
+# ---------------------------------------------------------------------------------
+df = pd.read_csv('기자간담회.csv')[['Date','Content']]
+df = df.dropna()
+
+
+
+# ---------------------------------------------------------------------------------
+# API KEY : 코드 제출을 위해 환경변수 설정
+# ---------------------------------------------------------------------------------
+
+load_dotenv()
+sola_api_key = os.getenv('sola_api_key')
 
 
 # ---------------------------------------------------------------------------------
