@@ -2,6 +2,8 @@
 
 - **프로젝트 기간** : 2025/07/04 ~ 2025/07/28 (25일)
 
+![국민은행](./image/환율적 참견시점.png)
+
 ---
 
 ## 1. 프로젝트의 목적 
@@ -162,6 +164,7 @@
 ### 4-3. 통화정책방향 브리핑 데이터
 <details>
 <summary>통화정책방향 브리핑 자막</summary>
+
 - 출처 : 한국은행 > 멀티콘텐츠 > 동영상 > 총재기자간담회 제공
 - 방법 : Selenium을 사용해 웹 스크래핑
 - 수집 기간 : 2025년 1월 ~ 2025년 7월
@@ -201,6 +204,36 @@
 | 16 | Low             | 환율 저가          | float    | 원/달러 환율 저가              |
 | 17 | Close           | 환율 종가          | float    | 원/달러 환율 종가              |
 | 18 | Change          | 환율 변동률        | float    | 전일 대비 환율 변동률 (%)      |
+
+</details>
+
+<details>
+<summary>원/유로</summary>
+
+- **수집 방법** : yfinance 라이브러리 활용
+- **수집 기간**: 2007-03-30 ~ 최신 **은행 영업일**(매일 자동 갱신)
+- **데이터 크기**: 2025-08-22 기준 **4,592 행 × 18 피처**
+
+| No | 컬럼ID             | 컬럼명              | Type     | 내용                             |
+|----|--------------------|---------------------|----------|----------------------------------|
+| 1  | Date               | 일자                | datetime | 거래 일자                        |
+| 2  | DAX_Open           | 독일 DAX 시가       | float    | 독일 DAX 지수의 시가             |
+| 3  | DAX_High           | 독일 DAX 고가       | float    | 독일 DAX 지수의 고가             |
+| 4  | DAX_Low            | 독일 DAX 저가       | float    | 독일 DAX 지수의 저가             |
+| 5  | DAX_Close          | 독일 DAX 종가       | float    | 독일 DAX 지수의 종가             |
+| 6  | EUROSTOXX50_Open   | 유로스톡스50 시가   | float    | 유로존 대표지수 EuroStoxx50 시가 |
+| 7  | EUROSTOXX50_High   | 유로스톡스50 고가   | float    | 유로존 대표지수 EuroStoxx50 고가 |
+| 8  | EUROSTOXX50_Low    | 유로스톡스50 저가   | float    | 유로존 대표지수 EuroStoxx50 저가 |
+| 9  | EUROSTOXX50_Close  | 유로스톡스50 종가   | float    | 유로존 대표지수 EuroStoxx50 종가 |
+| 10 | CAC_Open           | 프랑스 CAC40 시가   | float    | 프랑스 CAC40 지수의 시가         |
+| 11 | CAC_High           | 프랑스 CAC40 고가   | float    | 프랑스 CAC40 지수의 고가         |
+| 12 | CAC_Low            | 프랑스 CAC40 저가   | float    | 프랑스 CAC40 지수의 저가         |
+| 13 | CAC_Close          | 프랑스 CAC40 종가   | float    | 프랑스 CAC40 지수의 종가         |
+| 14 | Close              | 환율 종가           | float    | 원/유로 환율 종가                 |
+| 15 | Open               | 환율 시가           | float    | 원/유로 환율 시가                 |
+| 16 | High               | 환율 고가           | float    | 원/유로 환율 고가                 |
+| 17 | Low                | 환율 저가           | float    | 원/유로 환율 저가                 |
+| 18 | Change             | 환율 변동률         | float    | 전일 대비 환율 변동률 (%)         |
 
 </details>
 
@@ -270,36 +303,6 @@
 
 </details>
 
-<details>
-<summary>원/유로</summary>
-
-- **수집 방법** : yfinance 라이브러리 활용
-- **수집 기간**: 2007-03-30 ~ 최신 **은행 영업일**(매일 자동 갱신)
-- **데이터 크기**: 2025-08-22 기준 **4,592 행 × 18 피처**
-
-| No | 컬럼ID             | 컬럼명              | Type     | 내용                             |
-|----|--------------------|---------------------|----------|----------------------------------|
-| 1  | Date               | 일자                | datetime | 거래 일자                        |
-| 2  | DAX_Open           | 독일 DAX 시가       | float    | 독일 DAX 지수의 시가             |
-| 3  | DAX_High           | 독일 DAX 고가       | float    | 독일 DAX 지수의 고가             |
-| 4  | DAX_Low            | 독일 DAX 저가       | float    | 독일 DAX 지수의 저가             |
-| 5  | DAX_Close          | 독일 DAX 종가       | float    | 독일 DAX 지수의 종가             |
-| 6  | EUROSTOXX50_Open   | 유로스톡스50 시가   | float    | 유로존 대표지수 EuroStoxx50 시가 |
-| 7  | EUROSTOXX50_High   | 유로스톡스50 고가   | float    | 유로존 대표지수 EuroStoxx50 고가 |
-| 8  | EUROSTOXX50_Low    | 유로스톡스50 저가   | float    | 유로존 대표지수 EuroStoxx50 저가 |
-| 9  | EUROSTOXX50_Close  | 유로스톡스50 종가   | float    | 유로존 대표지수 EuroStoxx50 종가 |
-| 10 | CAC_Open           | 프랑스 CAC40 시가   | float    | 프랑스 CAC40 지수의 시가         |
-| 11 | CAC_High           | 프랑스 CAC40 고가   | float    | 프랑스 CAC40 지수의 고가         |
-| 12 | CAC_Low            | 프랑스 CAC40 저가   | float    | 프랑스 CAC40 지수의 저가         |
-| 13 | CAC_Close          | 프랑스 CAC40 종가   | float    | 프랑스 CAC40 지수의 종가         |
-| 14 | Close              | 환율 종가           | float    | 원/유로 환율 종가                 |
-| 15 | Open               | 환율 시가           | float    | 원/유로 환율 시가                 |
-| 16 | High               | 환율 고가           | float    | 원/유로 환율 고가                 |
-| 17 | Low                | 환율 저가           | float    | 원/유로 환율 저가                 |
-| 18 | Change             | 환율 변동률         | float    | 전일 대비 환율 변동률 (%)         |
-
-</details>
-
 ---
 
 ## 5. 근거
@@ -307,7 +310,7 @@
 - **달러/위안/엔/유로를 선정한 이유**  
   - 국가별 수출입 현황 → 중국, 미국, 일본 규모가 압도적  
   - 대륙별 거래 → 아시아·북미·유럽 상위  
-  - 베트남은 상위권이나 데이터 부족으로 제외  
+
 - **서비스 시범 지역으로 부산·울산을 타겟팅한 이유**  
   - 항만도시 기반 수출입 기업 비중 높음  
   - 수입 실적이 높은 기업군 → 환 리스크 관리 수요 큼  
