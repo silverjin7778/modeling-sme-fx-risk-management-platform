@@ -90,7 +90,7 @@
     - 대안: **뉴스 기반 EPU 지수**를 환율 변동성 지표로 활용  
 
 - 결과물
-[최종 발표 PPT](https://drive.google.com/drive/u/0/folders/1G9n9Piae_8TyuRMVFYkhc383_HHm1rpn)
+[최종 발표 PPT](https://drive.google.com/file/d/1pc2uyvVYs3qTx6xLiESUSWr1aScX4KmU/view?usp=sharing)
 [시연 영상](https://drive.google.com/file/d/1uVrQ2g3QwmS6flvMECl-pagcoEi1QrO2/view?usp=sharing)
 
 
