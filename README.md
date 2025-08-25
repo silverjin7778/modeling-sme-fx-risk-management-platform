@@ -67,6 +67,7 @@
 ## 2. 결과(핵심코드 포함)
 ### 2-1. 구현한 기능
 ![파이프라인](./image/파이프라인.png)
+    - 달러, 위안, 유로는 매일 데이터가 업데이트되는 자동화 파이프라인을 구축함
     - 환율 예측기 
         - 원/달러 (1일·1주일·1개월·3개월 후 예측)
         > 핵심 코드
@@ -106,6 +107,17 @@
   - 다만, 본래 목표였던 **환율 예측 판단의 참고 지표 제공**이라는 목적을 달성하기 위해  
     뉴스 데이터를 활용한 **EPU 지수 기반 환율 변동성 지표**를 새롭게 개발하여 대안으로 적용
 
+### 3-3. **환율 예측에 필요한 데이터 최신화의 어려움**
+  - 논문을 참고해 만든 환율 예측 모델에는 EPU 지수 등 매일 업데이트되지 않는 컬럼들이 많았음
+  - 그렇게 논문을 참고해 만들었을 때는 2025년 6월까지만 환율을 예측할 수 있는 어려움이 있었음
+  - 결국 최신화된 정보로 환율을 예측하기 위해 매일 업데이트할 수 있는 컬럼만 사용하게 됨
+
+### 3-4. **통화정책 브리핑 자막 자동화 수집 실패**
+  - 한국은행 Youtube 채널을 특정해 자막을 자동으로 가져오는 파이프라인을 구축하고자 했음
+  - 한국은행 채널에서 올리는 동영상이 워낙 많아서 어려웠음
+  - 통화정책방향 동영상만 정리해둔 재생목록을 활용해 자막을 가져오고자 했음
+  - 동영상 Key를 자동으로 특정할 수가 없어서 자동화로 가져오는 구조는 만들지 못하고
+  - 직접 자막을 사이트에서 스크래핑해서 데이터프레임으로 저장하는 방식으로 전환함
 
 ---
 ## 4. 데이터 설명
@@ -149,25 +161,127 @@
 ### 4-3. 통화정책방향 브리핑 데이터
 <details>
 <summary>통화정책방향 브리핑 자막</summary>
-- 출처 : 
+- 출처 : 한국은행 > 멀티콘텐츠 > 동영상 > 총재기자간담회 제공
+- 방법 : Selenium을 사용해 웹 스크래핑
 - 수집 기간 : 2025년 1월 ~ 2025년 7월
 
 | No | 컬럼ID          | 컬럼명         | Type   | 내용                 |
 |----|----------------|---------------|--------|----------------------|
-| 1  | Date           | Date          | object | 개최 일자            |
-| 2  | Content        | Content       | object | 브리핑 자막          |
-| 3  | default_summary| default_summary| object | 기본 요약 내용       |
-| 4  | sola_summary   | sola_summary  | object | COSTAR 요약 결과     |
+| 1  | Date           | Date          | object | 개최 일자 (%Y-%m)            |
+| 2  | Content        | Content       | object | 유튜브에 업로드된 한국은행 통화정책 기자간담회 약 1시간 분량의 자막          |
+
 </details>
 
 ### 4-4. 환율 예측 데이터
 <details>
-<summary>테이블 정의서 - 환율 </summary>
-
-- 데이터 명세서  
-- 전처리 코드  
+<summary>원/달러</summary>
+| No | 컬럼ID           | 컬럼명            | Type     | 내용                          |
+|----|-----------------|------------------|----------|-------------------------------|
+| 1  | Date            | 일자              | datetime | 거래 일자                     |
+| 2  | S&P500_Open     | S&P500 시가       | float    | S&P500 지수의 시가            |
+| 3  | S&P500_High     | S&P500 고가       | float    | S&P500 지수의 고가            |
+| 4  | S&P500_Low      | S&P500 저가       | float    | S&P500 지수의 저가            |
+| 5  | S&P500_Close    | S&P500 종가       | float    | S&P500 지수의 종가            |
+| 6  | DowJones_Open   | 다우존스 시가      | float    | 다우존스 지수의 시가           |
+| 7  | DowJones_High   | 다우존스 고가      | float    | 다우존스 지수의 고가           |
+| 8  | DowJones_Low    | 다우존스 저가      | float    | 다우존스 지수의 저가           |
+| 9  | DowJones_Close  | 다우존스 종가      | float    | 다우존스 지수의 종가           |
+| 10 | NASDAQ_Open     | 나스닥 시가        | float    | 나스닥 지수의 시가             |
+| 11 | NASDAQ_High     | 나스닥 고가        | float    | 나스닥 지수의 고가             |
+| 12 | NASDAQ_Low      | 나스닥 저가        | float    | 나스닥 지수의 저가             |
+| 13 | NASDAQ_Close    | 나스닥 종가        | float    | 나스닥 지수의 종가             |
+| 14 | Open            | 환율 시가          | float    | 원/달러 환율 시가              |
+| 15 | High            | 환율 고가          | float    | 원/달러 환율 고가              |
+| 16 | Low             | 환율 저가          | float    | 원/달러 환율 저가              |
+| 17 | Close           | 환율 종가          | float    | 원/달러 환율 종가              |
+| 18 | Change          | 환율 변동률        | float    | 전일 대비 환율 변동률 (%)      |
 
 </details>
+
+<details>
+<summary>원/위안</summary>
+
+| No | 컬럼ID                                | 컬럼명                         | Type     | 내용                                      |
+|----|---------------------------------------|--------------------------------|----------|-------------------------------------------|
+| 1  | Date                                  | 일자                           | datetime | 거래 일자                                 |
+| 2  | Shanghai Composite_Open               | 상하이 종합 시가                | float    | 상하이 종합지수의 시가                    |
+| 3  | Shanghai Composite_High               | 상하이 종합 고가                | float    | 상하이 종합지수의 고가                    |
+| 4  | Shanghai Composite_Low                | 상하이 종합 저가                | float    | 상하이 종합지수의 저가                    |
+| 5  | Shanghai Composite_Close              | 상하이 종합 종가                | float    | 상하이 종합지수의 종가                    |
+| 6  | Shenzhen Component_Open               | 선전 종합 시가                  | float    | 선전 종합지수의 시가                      |
+| 7  | Shenzhen Component_High               | 선전 종합 고가                  | float    | 선전 종합지수의 고가                      |
+| 8  | Shenzhen Component_Low                | 선전 종합 저가                  | float    | 선전 종합지수의 저가                      |
+| 9  | Shenzhen Component_Close              | 선전 종합 종가                  | float    | 선전 종합지수의 종가                      |
+| 10 | Hang Seng_Open                        | 홍콩 항셍 시가                  | float    | 홍콩 항셍지수의 시가                      |
+| 11 | Hang Seng_High                        | 홍콩 항셍 고가                  | float    | 홍콩 항셍지수의 고가                      |
+| 12 | Hang Seng_Low                         | 홍콩 항셍 저가                  | float    | 홍콩 항셍지수의 저가                      |
+| 13 | Hang Seng_Close                       | 홍콩 항셍 종가                  | float    | 홍콩 항셍지수의 종가                      |
+| 14 | Hang Seng China Enterprises_Open      | 홍콩 H-주 시가                  | float    | 항셍 중국기업지수(HSCEI)의 시가           |
+| 15 | Hang Seng China Enterprises_High      | 홍콩 H-주 고가                  | float    | 항셍 중국기업지수(HSCEI)의 고가           |
+| 16 | Hang Seng China Enterprises_Low       | 홍콩 H-주 저가                  | float    | 항셍 중국기업지수(HSCEI)의 저가           |
+| 17 | Hang Seng China Enterprises_Close     | 홍콩 H-주 종가                  | float    | 항셍 중국기업지수(HSCEI)의 종가           |
+| 18 | Close                                 | 환율 종가                       | float    | 원/위안 환율 종가                         |
+| 19 | Open                                  | 환율 시가                       | float    | 원/위안 환율 시가                         |
+| 20 | High                                  | 환율 고가                       | float    | 원/위안 환율 고가                         |
+| 21 | Low                                   | 환율 저가                       | float    | 원/위안 환율 저가                         |
+| 22 | Change                                | 환율 변동률                     | float    | 전일 대비 환율 변동률 (%)                 |
+
+
+</details>
+
+<details>
+<summary>원/엔</summary>
+
+| No | 컬럼ID          | 컬럼명             | Type     | 내용                          |
+|----|-----------------|--------------------|----------|-------------------------------|
+| 1  | Date            | 일자               | datetime | 거래 일자                     |
+| 2  | Nikkei225_Open  | 니케이225 시가     | float    | 일본 니케이225 지수의 시가    |
+| 3  | Nikkei225_High  | 니케이225 고가     | float    | 일본 니케이225 지수의 고가    |
+| 4  | Nikkei225_Low   | 니케이225 저가     | float    | 일본 니케이225 지수의 저가    |
+| 5  | Nikkei225_Close | 니케이225 종가     | float    | 일본 니케이225 지수의 종가    |
+| 6  | TOPIX_Open      | 토픽스(TOPIX) 시가 | float    | 일본 토픽스 지수의 시가       |
+| 7  | TOPIX_High      | 토픽스 고가        | float    | 일본 토픽스 지수의 고가       |
+| 8  | TOPIX_Low       | 토픽스 저가        | float    | 일본 토픽스 지수의 저가       |
+| 9  | TOPIX_Close     | 토픽스 종가        | float    | 일본 토픽스 지수의 종가       |
+| 10 | Mothers_Open    | 마더즈 시가        | float    | 일본 마더즈 지수의 시가       |
+| 11 | Mothers_High    | 마더즈 고가        | float    | 일본 마더즈 지수의 고가       |
+| 12 | Mothers_Low     | 마더즈 저가        | float    | 일본 마더즈 지수의 저가       |
+| 13 | Mothers_Close   | 마더즈 종가        | float    | 일본 마더즈 지수의 종가       |
+| 14 | Close           | 환율 종가          | float    | 원/엔 환율 종가                |
+| 15 | Open            | 환율 시가          | float    | 원/엔 환율 시가                |
+| 16 | High            | 환율 고가          | float    | 원/엔 환율 고가                |
+| 17 | Low             | 환율 저가          | float    | 원/엔 환율 저가                |
+| 18 | Change          | 환율 변동률        | float    | 전일 대비 환율 변동률 (%)      |
+
+
+</details>
+
+<details>
+<summary>원/유로</summary>
+
+| No | 컬럼ID             | 컬럼명              | Type     | 내용                             |
+|----|--------------------|---------------------|----------|----------------------------------|
+| 1  | Date               | 일자                | datetime | 거래 일자                        |
+| 2  | DAX_Open           | 독일 DAX 시가       | float    | 독일 DAX 지수의 시가             |
+| 3  | DAX_High           | 독일 DAX 고가       | float    | 독일 DAX 지수의 고가             |
+| 4  | DAX_Low            | 독일 DAX 저가       | float    | 독일 DAX 지수의 저가             |
+| 5  | DAX_Close          | 독일 DAX 종가       | float    | 독일 DAX 지수의 종가             |
+| 6  | EUROSTOXX50_Open   | 유로스톡스50 시가   | float    | 유로존 대표지수 EuroStoxx50 시가 |
+| 7  | EUROSTOXX50_High   | 유로스톡스50 고가   | float    | 유로존 대표지수 EuroStoxx50 고가 |
+| 8  | EUROSTOXX50_Low    | 유로스톡스50 저가   | float    | 유로존 대표지수 EuroStoxx50 저가 |
+| 9  | EUROSTOXX50_Close  | 유로스톡스50 종가   | float    | 유로존 대표지수 EuroStoxx50 종가 |
+| 10 | CAC_Open           | 프랑스 CAC40 시가   | float    | 프랑스 CAC40 지수의 시가         |
+| 11 | CAC_High           | 프랑스 CAC40 고가   | float    | 프랑스 CAC40 지수의 고가         |
+| 12 | CAC_Low            | 프랑스 CAC40 저가   | float    | 프랑스 CAC40 지수의 저가         |
+| 13 | CAC_Close          | 프랑스 CAC40 종가   | float    | 프랑스 CAC40 지수의 종가         |
+| 14 | Close              | 환율 종가           | float    | 원/유로 환율 종가                 |
+| 15 | Open               | 환율 시가           | float    | 원/유로 환율 시가                 |
+| 16 | High               | 환율 고가           | float    | 원/유로 환율 고가                 |
+| 17 | Low                | 환율 저가           | float    | 원/유로 환율 저가                 |
+| 18 | Change             | 환율 변동률         | float    | 전일 대비 환율 변동률 (%)         |
+
+</details>
+
 ---
 
 ## 5. 근거
@@ -200,3 +314,7 @@
 ├── 📑 데이터명세서.xlsx                 # 데이터 및 변수 설명  
 └── 🎬 시연영상.mp4                     # 플랫폼 시연 영상  
 ```
+
+---
+## 7. 회고
+- 야후파이낸스를 활용해 최신 환율 예측 데이터를 자동화로 구축되도록 수집했는데 엔화의 경우, 2021년 10월 1일 이후로 제공이 중단된 심볼들이 있어서 2021년 10월 1일까지만 데이터를 활용할 수 있었음 -> 엔화는 최신 환율 예측에 실패한 것이 아쉬움 -> 환율 예측을 할 때, 논문 참고로 하다보니 아무 컬럼이나 수집할 수는 없었던 한계
