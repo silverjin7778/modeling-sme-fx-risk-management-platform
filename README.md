@@ -87,8 +87,10 @@
 > 핵심 코드
 
 - 월별 한국은행 통화정책 브리핑 요약  
-> [핵심 코드 : API 연결]
+<details>
+<summary> 핵심 코드 (API 연결)</summary>
 https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/aa5a64c4ee2da09723a90c05b292534f99ad5fec/code_py/%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89%20%ED%86%B5%ED%99%94%EC%A0%95%EC%B1%85%20%EB%B8%8C%EB%A6%AC%ED%95%91%20%EC%9A%94%EC%95%BD/%EB%B8%8C%EB%A6%AC%ED%95%91%EC%9A%94%EC%95%BD_upstage_sola.py#L22-L36
+</details> 
 
 ### 2-2. 구현 실패 기능
   - 뉴스 감성분석 기반 환율 분류 예측  
