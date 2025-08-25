@@ -65,7 +65,7 @@
 
 ---
 ## 2. 결과(핵심코드 포함)
-- 구현한 기능
+### 2-1. 구현한 기능
 ![파이프라인](./image/파이프라인.png)
     - 환율 예측기 
         - 원/달러 (1일·1주일·1개월·3개월 후 예측)
@@ -83,15 +83,15 @@
     - 월별 한국은행 통화정책 브리핑 요약  
     > 핵심 코드
 
-- 구현 실패 기능
+### 2-2. 구현 실패 기능
   - 뉴스 감성분석 기반 환율 분류 예측  
     - 샘플 테스트에서 Accuracy ~0.5 수준 → 성능 미달  
     - 의미 없는 결과라 모델 폐기  
     - 대안: **뉴스 기반 EPU 지수**를 환율 변동성 지표로 활용  
 
-- 결과물
-[최종 발표 PPT](https://drive.google.com/file/d/1pc2uyvVYs3qTx6xLiESUSWr1aScX4KmU/view?usp=sharing)
-[시연 영상](https://drive.google.com/file/d/1uVrQ2g3QwmS6flvMECl-pagcoEi1QrO2/view?usp=sharing)
+### 2-3. 🎤 발표 자료
+   - 📑 [최종 발표 PPT](https://drive.google.com/file/d/1pc2uyvVYs3qTx6xLiESUSWr1aScX4KmU/view?usp=sharing)
+   - 🎬 [시연 영상](https://drive.google.com/file/d/1uVrQ2g3QwmS6flvMECl-pagcoEi1QrO2/view?usp=sharing)
 
 
 ## 3. 이슈사항
