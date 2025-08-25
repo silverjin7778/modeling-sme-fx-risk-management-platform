@@ -72,25 +72,48 @@
     - 달러, 위안, 유로는 매일 데이터가 업데이트되는 자동화 파이프라인을 구축함
     - 환율 예측기 
         - 원/달러 (1일·1주일·1개월·3개월 후 예측)
-        > 핵심 코드
+        <details>
+        <summary> 핵심 코드 </summary>
+        https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/6c0fc0a4a313b676eaf4047d6293e98385a8badb/code_py/%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1_%ED%9A%8C%EA%B7%80/%EB%8B%AC%EB%9F%AC%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1.py#L94-L151
+        </details> 
         - 원/위안 (1일·1주일·1개월·3개월 후 예측)
-        > 핵심 코드
+        <details>
+        <summary> 핵심 코드 </summary>
+        https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/6c0fc0a4a313b676eaf4047d6293e98385a8badb/code_py/%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1_%ED%9A%8C%EA%B7%80/%EC%9C%84%EC%95%88%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1.py#L445-L481
+        </details> 
         - 원/엔 (1일·1주일·1개월·3개월 후 예측)
-        > 핵심 코드
+        <details>
+        <summary> 핵심 코드 </summary>
+        https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/6c0fc0a4a313b676eaf4047d6293e98385a8badb/code_py/%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1_%ED%9A%8C%EA%B7%80/%EC%97%94%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1.py#L208-L288
+        </details> 
         - 원/유로 (1일·1주일·1개월·3개월 후 예측)
-        > 핵심 코드
+        <details>
+        <summary> 핵심 코드 </summary>
+        https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/6c0fc0a4a313b676eaf4047d6293e98385a8badb/code_py/%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1_%ED%9A%8C%EA%B7%80/%EC%9C%A0%EB%A1%9C%ED%99%98%EC%9C%A8%EC%98%88%EC%B8%A1.py#L499-L527
+        </details> 
 
 - 대한민국 EPU 기반 환율 변동성 지수 개발  
-> 핵심 코드
+  <details>
+  <summary> 핵심 코드 </summary>
+  https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/cc802a90d052190ee8cdce3232ec5eef2701cd8e/code_py/%ED%99%98%EC%9C%A8%EB%B3%80%EB%8F%99%EC%84%B1%EC%A7%80%EC%88%98%20%EA%B0%9C%EB%B0%9C/epu_%EA%B3%84%EC%82%B0_2021_to_2025.py#L7-L128
+  </details> 
 
 - 월별 주요 이슈 토픽모델링
-> 핵심 코드
+<details>
+  <summary> 핵심 코드</summary>
+  https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/cc802a90d052190ee8cdce3232ec5eef2701cd8e/code_py/%ED%99%98%EC%9C%A8%EB%B3%80%EB%8F%99%EC%84%B1%EC%A7%80%EC%88%98%20%EA%B0%9C%EB%B0%9C/%EC%9B%94%EB%B3%84_%ED%86%A0%ED%94%BD%EB%AA%A8%EB%8D%B8%EB%A7%81.py#L145-L197
+  </details> 
 
 - 월별 한국은행 통화정책 브리핑 요약  
-<details>
-<summary> 핵심 코드 (API 연결)</summary>
-https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/aa5a64c4ee2da09723a90c05b292534f99ad5fec/code_py/%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89%20%ED%86%B5%ED%99%94%EC%A0%95%EC%B1%85%20%EB%B8%8C%EB%A6%AC%ED%95%91%20%EC%9A%94%EC%95%BD/%EB%B8%8C%EB%A6%AC%ED%95%91%EC%9A%94%EC%95%BD_upstage_sola.py#L22-L36
-</details> 
+  <details>
+  <summary> 핵심 코드 (API 연결)</summary>
+  https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/aa5a64c4ee2da09723a90c05b292534f99ad5fec/code_py/%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89%20%ED%86%B5%ED%99%94%EC%A0%95%EC%B1%85%20%EB%B8%8C%EB%A6%AC%ED%95%91%20%EC%9A%94%EC%95%BD/%EB%B8%8C%EB%A6%AC%ED%95%91%EC%9A%94%EC%95%BD_upstage_sola.py#L22-L36
+  </details> 
+
+    <details>
+  <summary> 핵심 코드 (프롬프트 엔지니어링 + 요약)</summary>
+  https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/94435319b6dfb30560f981e04013031c92434107/code_py/%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89%20%ED%86%B5%ED%99%94%EC%A0%95%EC%B1%85%20%EB%B8%8C%EB%A6%AC%ED%95%91%20%EC%9A%94%EC%95%BD/%EB%B8%8C%EB%A6%AC%ED%95%91%EC%9A%94%EC%95%BD_upstage_sola.py#L71-L131
+  </details> 
 
 ### 2-2. 구현 실패 기능
   - 뉴스 감성분석 기반 환율 분류 예측  
